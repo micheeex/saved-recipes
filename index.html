@@ -389,10 +389,13 @@ function loadRecipes() {
 }
 
 // Init
+// Show categories immediately, then refresh after data loads
+renderCategories();
+updateNavAuth();
 loadRecipes().then(function() {
   renderCategories();
   updateNavAuth();
-});
+}).catch(function(e) { console.error(e); });
 
 // Nav helpers
 function goHome() {
