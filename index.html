@@ -6,7 +6,6 @@
 <title>Recipe Archive</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/motion@11.11.13/dist/motion.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -67,15 +66,12 @@ nav{display:flex;justify-content:space-between;align-items:center;padding:1.1rem
 .collection-title em{font-style:italic;color:var(--accent)}
 .cat-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem}
 .cat-nav-controls{display:flex;gap:.4rem}
-.cat-track-wrap{overflow:hidden;padding-top:4px;margin-top:-4px}
-.cat-track{display:flex;transition:transform .55s cubic-bezier(.4,0,.2,1)}
-.cat-nav-controls{display:flex;gap:.4rem}
 .cat-arrow{background:none;border:1px solid rgba(60,30,10,.25);width:32px;height:32px;cursor:pointer;color:var(--dark);display:flex;align-items:center;justify-content:center;transition:all .2s}
 .cat-arrow:hover{background:var(--dark);color:var(--cream)}
 .cat-arrow:disabled{opacity:.2;pointer-events:none}
 .cat-arrow svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2}
-.cat-track-wrap{overflow:hidden;padding-top:4px;margin-top:-4px;display:inline-block;max-width:100%}
-.cat-track{display:inline-flex;white-space:nowrap;transition:transform .55s cubic-bezier(.4,0,.2,1)}
+.cat-track-wrap{overflow:hidden;padding-top:4px;margin-top:-4px}
+.cat-track{display:flex;transition:transform .55s cubic-bezier(.4,0,.2,1)}
 .cat-card{width:90px;flex-shrink:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;text-align:center}
 .cat-card:hover .cat-img-box{transform:scale(1.05)}
 .cat-img-box{width:80px;height:80px;border-radius:50%;background:#F5EFE6;border:1px solid #D4C5B3;display:flex;align-items:center;justify-content:center;font-size:1.75rem;transition:transform .4s cubic-bezier(.4,0,.2,1)}
@@ -109,20 +105,19 @@ nav{display:flex;justify-content:space-between;align-items:center;padding:1.1rem
 .modal-submit:hover{opacity:.75}
 .vbtn{background:none;border:1px solid rgba(60,30,10,.2);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;padding:.28rem .65rem;cursor:pointer;color:var(--mid);transition:all .2s;font-family:var(--sans)}
 .vbtn:hover{background:var(--dark);color:var(--cream);border-color:var(--dark)}
+.vbtn.del{color:#a04040;border-color:#a04040}
+.vbtn.del:hover{background:#a04040;color:#fff}
+.vbtn.star-on{background:#c9a028;color:#fff;border-color:#c9a028}
+.vbtn.tried-on{background:#5a7a4a;color:#fff;border-color:#5a7a4a}
 .scaler-bar{display:flex;align-items:center;gap:.7rem;margin-bottom:1rem;flex-wrap:wrap}
 .scaler-btn{background:none;border:1px solid rgba(60,30,10,.25);width:26px;height:26px;cursor:pointer;font-size:1rem;color:var(--dark);display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;line-height:1}
 .scaler-btn:hover{background:var(--dark);color:var(--cream)}
 .scaler-count{font-family:var(--serif);font-size:1rem;min-width:1.5rem;text-align:center}
 .scaler-label{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mid)}
-.scaler-reset{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);background:none;border:none;cursor:pointer;padding:0;text-decoration:underline;display:none}
-.scaler-info{font-size:.7rem;color:var(--mid);display:flex;align-items:center;gap:.3rem}
+.scaler-reset{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);background:none;border:none;cursor:pointer;padding:0;text-decoration:underline}
 .info-icon{cursor:pointer;color:var(--accent);font-size:.8rem;position:relative}
 .info-tip{display:none;position:absolute;left:0;top:1.4rem;background:var(--dark);color:var(--cream);font-size:.68rem;padding:.4rem .7rem;white-space:nowrap;z-index:10;pointer-events:none}
 .info-icon:hover .info-tip{display:block}
-
-.vbtn.del:hover{background:#a04040;color:#fff}
-.vbtn.star-on{background:#c9a028;color:#fff;border-color:#c9a028}
-.vbtn.tried-on{background:#5a7a4a;color:#fff;border-color:#5a7a4a}
 .toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(50px);background:var(--dark);color:var(--cream);font-size:.72rem;letter-spacing:.07em;padding:.6rem 1.3rem;transition:transform .4s,opacity .4s;z-index:3000;opacity:0;pointer-events:none}
 .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
 .empty{text-align:center;padding:2.5rem;color:var(--mid);font-style:italic;font-family:var(--serif)}
@@ -139,13 +134,12 @@ nav{display:flex;justify-content:space-between;align-items:center;padding:1.1rem
   <div class="side-text2"><span class="side-label">A living kitchen journal &nbsp;&middot;&nbsp; Updated always</span></div>
 
   <div id="app-frame">
-
     <nav>
       <div class="nav-links">
         <span class="nav-link" onclick="goHome()">Home</span>
         <span class="nav-link" onclick="openAbout()">About</span>
         <span class="nav-link" onclick="openAllRecipes()">All Recipes</span>
-        <span class="nav-link" onclick="openStarred()" title="Starred recipes" style="font-size:.9rem">&#9734;</span>
+        <span class="nav-link" onclick="openStarred()" title="Starred" style="font-size:.9rem">&#9734;</span>
       </div>
       <div class="nav-right">
         <div class="search-wrap">
@@ -216,10 +210,9 @@ nav{display:flex;justify-content:space-between;align-items:center;padding:1.1rem
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
         Back
       </button>
-      <h2 style="font-family:var(--serif);font-size:1.8rem;font-weight:400;margin-bottom:2rem">All <em style="color:var(--accent)">Recipes</em></h2>
+      <h2 id="arp-heading" style="font-family:var(--serif);font-size:1.8rem;font-weight:400;margin-bottom:2rem">All <em style="color:var(--accent)">Recipes</em></h2>
       <div id="arp-body"></div>
     </div>
-
   </div>
 </div>
 
@@ -333,11 +326,73 @@ var recipes = [];
 var catOffset = 0, CAT_VISIBLE = 5, currentCategory = null, searchOpen = false, currentViewId = null;
 var isLoggedIn = false;
 
+// ── SUPABASE ──────────────────────────────────────────────
+var SUPABASE_URL = 'https://lwvlmzpsvyeppgpllzvh.supabase.co';
+var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx3dmxtenBzdnllcHBncGxsenZoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg5NzU1MTIsImV4cCI6MjA5NDU1MTUxMn0.YvlEDB0xlubgO2MYsqBnXwRKYI1wwUqIfox7I2n4KfM';
+var _sb = null;
+
+function initSupabase() {
+  if (typeof supabase !== 'undefined') {
+    _sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  }
+}
+
+function loadRecipes(callback) {
+  if (!_sb) { callback(); return; }
+  _sb.from('recipes').select('*').order('created_at', { ascending: false })
+    .then(function(res) {
+      if (res.error) { console.error('Load error:', res.error.message); callback(); return; }
+      recipes = (res.data || []).map(function(r) {
+        return {
+          id: r.id, title: r.title || '', category: r.category || '',
+          tags: r.tags || '', url: r.url || '', ingredients: r.ingredients || '',
+          notes: r.notes || '', extraNotes: r.extra_notes || '',
+          starred: !!r.starred, tried: !!r.tried
+        };
+      });
+      console.log('Loaded', recipes.length, 'recipes');
+      callback();
+    });
+}
+
+function dbInsert(r, callback) {
+  if (!_sb) { console.warn('Supabase not ready'); callback(null); return; }
+  _sb.from('recipes').insert({
+    title: r.title, category: r.category, tags: r.tags, url: r.url,
+    ingredients: r.ingredients, notes: r.notes, extra_notes: r.extraNotes,
+    starred: r.starred, tried: r.tried
+  }).select('*').single()
+    .then(function(res) {
+      if (res.error) { console.error('Insert error:', res.error.message); callback(null); return; }
+      console.log('Inserted:', res.data);
+      callback(res.data);
+    })
+    .catch(function(e) { console.error('Insert exception:', e); callback(null); });
+}
+
+function dbUpdate(r) {
+  if (!_sb) return;
+  _sb.from('recipes').update({
+    title: r.title, category: r.category, tags: r.tags, url: r.url,
+    ingredients: r.ingredients, notes: r.notes, extra_notes: r.extraNotes,
+    starred: r.starred, tried: r.tried
+  }).eq('id', r.id)
+    .then(function(res) { if (res.error) console.error('Update error:', res.error.message); });
+}
+
+function dbDelete(id) {
+  if (!_sb) return;
+  _sb.from('recipes').delete().eq('id', id)
+    .then(function(res) { if (res.error) console.error('Delete error:', res.error.message); });
+}
+// ─────────────────────────────────────────────────────────
+
 function requireLogin() {
   if (!isLoggedIn) { openLoginModal(); return false; }
   return true;
 }
 
+// ── AUTH ──────────────────────────────────────────────────
 function openLoginModal() {
   document.getElementById('login-pw').value = '';
   document.getElementById('login-err').style.display = 'none';
@@ -358,49 +413,17 @@ function submitLogin() {
     document.getElementById('login-pw').focus();
   }
 }
-function logout() {
-  isLoggedIn = false;
-  updateNavAuth();
-  showToast('Signed out.');
-}
+function logout() { isLoggedIn = false; updateNavAuth(); showToast('Signed out.'); }
 function updateNavAuth() {
   var btn = document.getElementById('nav-auth-btn');
-  if (isLoggedIn) {
-    btn.textContent = 'Sign out';
-    btn.onclick = logout;
-  } else {
-    btn.textContent = 'Sign in';
-    btn.onclick = openLoginModal;
-  }
-  // Show/hide add button and edit button
+  if (isLoggedIn) { btn.textContent = 'Sign out'; btn.onclick = logout; }
+  else { btn.textContent = 'Sign in'; btn.onclick = openLoginModal; }
   document.querySelector('.add-btn').style.display = isLoggedIn ? 'flex' : 'none';
   var editBtn = document.getElementById('v-edit-btn');
   if (editBtn) editBtn.style.display = isLoggedIn ? 'inline-block' : 'none';
 }
-var _mem = {};
-function saveRecipes() {
-  var s = JSON.stringify(recipes);
-  try { localStorage.setItem('ra_recipes', s); } catch(e) { _mem.r = s; }
-}
-function loadRecipes() {
-  try {
-    var s = localStorage.getItem('ra_recipes') || _mem.r;
-    if (s) recipes = JSON.parse(s);
-  } catch(e) {}
-}
 
-// Init
-// Show categories immediately, then refresh after data loads
-renderCategories();
-updateNavAuth();
-window.addEventListener('load', function() {
-  loadRecipes().then(function() {
-    renderCategories();
-    updateNavAuth();
-  }).catch(function(e) { console.error(e); });
-});
-
-// Nav helpers
+// ── NAV ───────────────────────────────────────────────────
 function goHome() {
   currentCategory = null;
   document.getElementById('cat-page').style.display = 'none';
@@ -411,34 +434,8 @@ function goHome() {
   document.getElementById('searchInput').value = '';
   renderCategories();
 }
-
 function openAbout() { document.getElementById('about-modal').classList.add('open'); }
 function closeAbout() { document.getElementById('about-modal').classList.remove('open'); }
-
-function openStarred() {
-  document.getElementById('intro-block').style.display = 'none';
-  document.getElementById('collection-section').style.display = 'none';
-  document.getElementById('cat-page').style.display = 'none';
-  document.getElementById('search-results-section').style.display = 'none';
-  document.getElementById('all-recipes-page').style.display = 'block';
-  document.querySelector('#all-recipes-page h2').innerHTML = 'All <em style="color:var(--accent)">Recipes</em>';
-  var body = document.getElementById('arp-body');
-  var starred = recipes.filter(function(r) { return r.starred; });
-  if (!starred.length) {
-    body.innerHTML = '<p class="empty">No starred recipes yet — star a recipe to save it here.</p>';
-    document.querySelector('#all-recipes-page h2').innerHTML = '&#9733; <em style="color:var(--accent)">Starred</em>';
-    return;
-  }
-  document.querySelector('#all-recipes-page h2').innerHTML = '&#9733; <em style="color:var(--accent)">Starred</em>';
-  var html = starred.map(function(r) {
-    return '<div class="slim-card" onclick="openView(' + r.id + ')">'
-      + '<div><p class="slim-title">' + r.title + '</p>'
-      + '<p class="slim-tags">' + (r.category || '') + (r.tags ? ' &middot; ' + r.tags : '') + '</p></div>'
-      + '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>'
-      + '</div>';
-  }).join('');
-  body.innerHTML = html;
-}
 
 function openAllRecipes() {
   document.getElementById('intro-block').style.display = 'none';
@@ -446,43 +443,53 @@ function openAllRecipes() {
   document.getElementById('cat-page').style.display = 'none';
   document.getElementById('search-results-section').style.display = 'none';
   document.getElementById('all-recipes-page').style.display = 'block';
+  document.getElementById('arp-heading').innerHTML = 'All <em style="color:var(--accent)">Recipes</em>';
   var body = document.getElementById('arp-body');
-  if (!recipes.length) { body.innerHTML = '<p class="empty">No recipes yet — add one with the + button.</p>'; return; }
+  if (!recipes.length) { body.innerHTML = '<p class="empty">No recipes yet.</p>'; return; }
   var html = '';
-  // Show all CATS that have recipes
   CATS.forEach(function(cat) {
     var list = recipes.filter(function(r) { return r.category === cat; });
     if (!list.length) return;
-    html += '<div style="margin-bottom:2.5rem">'
-      + '<p style="font-family:var(--serif);font-size:1.2rem;font-style:italic;font-weight:400;margin-bottom:.8rem;padding-bottom:.5rem;border-bottom:1px solid var(--line)">' + cat + ' <span style="font-family:var(--sans);font-size:.65rem;letter-spacing:.1em;color:var(--mid);font-style:normal">(' + list.length + ')</span></p>';
+    html += '<div style="margin-bottom:2.5rem"><p style="font-family:var(--serif);font-size:1.2rem;font-style:italic;font-weight:400;margin-bottom:.8rem;padding-bottom:.5rem;border-bottom:1px solid var(--line)">'
+      + cat + ' <span style="font-family:var(--sans);font-size:.65rem;letter-spacing:.1em;color:var(--mid);font-style:normal">(' + list.length + ')</span></p>';
     list.forEach(function(r) {
       html += '<div class="slim-card" onclick="openView(' + r.id + ')">'
-        + '<div>'
-        + '<p class="slim-title">' + r.title + '</p>'
-        + '<p class="slim-tags">' + (r.tags || '') + '</p>'
-        + '</div>'
-        + '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>'
-        + '</div>';
+        + '<div><p class="slim-title">' + r.title + '</p><p class="slim-tags">' + (r.tags || '') + '</p></div>'
+        + '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>';
     });
     html += '</div>';
   });
-  // Catch any recipes filed under "Other"
   var others = recipes.filter(function(r) { return CATS.indexOf(r.category) === -1; });
   if (others.length) {
-    html += '<div style="margin-bottom:2.5rem">'
-      + '<p style="font-family:var(--serif);font-size:1.2rem;font-style:italic;font-weight:400;margin-bottom:.8rem;padding-bottom:.5rem;border-bottom:1px solid var(--line)">Other</p>';
+    html += '<div style="margin-bottom:2.5rem"><p style="font-family:var(--serif);font-size:1.2rem;font-style:italic;font-weight:400;margin-bottom:.8rem;padding-bottom:.5rem;border-bottom:1px solid var(--line)">Other</p>';
     others.forEach(function(r) {
       html += '<div class="slim-card" onclick="openView(' + r.id + ')">'
         + '<div><p class="slim-title">' + r.title + '</p><p class="slim-tags">' + (r.tags || '') + '</p></div>'
-        + '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>'
-        + '</div>';
+        + '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>';
     });
     html += '</div>';
   }
   body.innerHTML = html || '<p class="empty">No recipes yet.</p>';
 }
 
-// Categories
+function openStarred() {
+  document.getElementById('intro-block').style.display = 'none';
+  document.getElementById('collection-section').style.display = 'none';
+  document.getElementById('cat-page').style.display = 'none';
+  document.getElementById('search-results-section').style.display = 'none';
+  document.getElementById('all-recipes-page').style.display = 'block';
+  document.getElementById('arp-heading').innerHTML = '&#9733; <em style="color:var(--accent)">Starred</em>';
+  var body = document.getElementById('arp-body');
+  var starred = recipes.filter(function(r) { return r.starred; });
+  if (!starred.length) { body.innerHTML = '<p class="empty">No starred recipes yet.</p>'; return; }
+  body.innerHTML = starred.map(function(r) {
+    return '<div class="slim-card" onclick="openView(' + r.id + ')">'
+      + '<div><p class="slim-title">' + r.title + '</p><p class="slim-tags">' + (r.category || '') + (r.tags ? ' &middot; ' + r.tags : '') + '</p></div>'
+      + '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>';
+  }).join('');
+}
+
+// ── CATEGORIES ────────────────────────────────────────────
 function allCategories() {
   var counts = {};
   recipes.forEach(function(r) { var c = r.category || 'Other'; counts[c] = (counts[c] || 0) + 1; });
@@ -494,13 +501,12 @@ function renderCategories() {
   track.innerHTML = cats.map(function(c) {
     return '<div class="cat-card' + (currentCategory === c.name ? ' active' : '') + '" onclick="filterCategory(\'' + c.name.replace(/'/g, "\\'") + '\')">'
       + '<div class="cat-img-box">' + (EMOJIS[c.name] || EMOJIS.Default) + '</div>'
-      + '<div class="cat-info"><p class="cat-name">' + c.name + '</p><p class="cat-count">' + c.count + ' recipe' + (c.count !== 1 ? 's' : '') + '</p></div>'
-      + '</div>';
+      + '<div class="cat-info"><p class="cat-name">' + c.name + '</p><p class="cat-count">' + c.count + ' recipe' + (c.count !== 1 ? 's' : '') + '</p></div></div>';
   }).join('');
   updateCatSlide(cats.length);
 }
 function updateCatSlide(total) {
-  document.getElementById('cat-track').style.transform = 'translateX(-' + (catOffset * 110) + 'px)';
+  document.getElementById('cat-track').style.transform = 'translateX(-' + (catOffset * 90) + 'px)';
   document.getElementById('cat-prev').disabled = catOffset === 0;
   document.getElementById('cat-next').disabled = catOffset >= Math.max(0, total - CAT_VISIBLE);
 }
@@ -517,42 +523,15 @@ function filterCategory(cat) {
   var filtered = recipes.filter(function(r) { return r.category === cat; });
   document.getElementById('cat-page-title').textContent = cat + ' (' + filtered.length + ')';
   var grid = document.getElementById('cat-page-grid');
-  if (!filtered.length) {
-    grid.innerHTML = '<p class="empty">No recipes in this category yet.</p>';
-  } else {
-    grid.innerHTML = filtered.map(function(r) {
-      return '<div class="slim-card" onclick="openView(' + r.id + ')">'
-        + '<div><p class="slim-title">' + r.title + '</p><p class="slim-tags">' + (r.tags || '') + '</p></div>'
-        + '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>'
-        + '</div>';
-    }).join('');
-  }
+  grid.innerHTML = filtered.length ? filtered.map(function(r) {
+    return '<div class="slim-card" onclick="openView(' + r.id + ')">'
+      + '<div><p class="slim-title">' + r.title + '</p><p class="slim-tags">' + (r.tags || '') + '</p></div>'
+      + '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>';
+  }).join('') : '<p class="empty">No recipes in this category yet.</p>';
   document.getElementById('cat-page').style.display = 'block';
 }
 
-// Scale quantities in an ingredient line
-function scaleLineQty(line, ratio) {
-  return line.replace(/(\d+\s*\/\s*\d+|\d+(?:\.\d+)?)/g, function(match) {
-    var val;
-    if (match.indexOf('/') >= 0) {
-      var parts = match.split('/');
-      val = parseFloat(parts[0]) / parseFloat(parts[1]);
-    } else {
-      val = parseFloat(match);
-    }
-    var scaled = val * ratio;
-    // Try to express as clean fraction or whole
-    if (Math.abs(scaled - Math.round(scaled)) < 0.05) return String(Math.round(scaled));
-    if (Math.abs(scaled - 0.25) < 0.05) return '1/4';
-    if (Math.abs(scaled - 0.5) < 0.05) return '1/2';
-    if (Math.abs(scaled - 0.75) < 0.05) return '3/4';
-    if (Math.abs(scaled - 1.5) < 0.05) return '1 1/2';
-    if (Math.abs(scaled - 2.5) < 0.05) return '2 1/2';
-    return (Math.round(scaled * 4) / 4).toString();
-  });
-}
-
-// Strip leading symbols from pasted text
+// ── HELPERS ───────────────────────────────────────────────
 function stripLeading(line) {
   return line
     .replace(/^[\s\-*~!•◦▸→✓✗▢]+/, '')
@@ -563,45 +542,54 @@ function stripLeading(line) {
     .trim();
 }
 
-// View recipe
+function scaleLineQty(line, ratio) {
+  return line.replace(/(\d+\s*\/\s*\d+|\d+(?:\.\d+)?)/g, function(match) {
+    var val;
+    if (match.indexOf('/') >= 0) {
+      var parts = match.split('/');
+      val = parseFloat(parts[0]) / parseFloat(parts[1]);
+    } else { val = parseFloat(match); }
+    var scaled = val * ratio;
+    if (Math.abs(scaled - Math.round(scaled)) < 0.05) return String(Math.round(scaled));
+    if (Math.abs(scaled - 0.25) < 0.05) return '1/4';
+    if (Math.abs(scaled - 0.5) < 0.05) return '1/2';
+    if (Math.abs(scaled - 0.75) < 0.05) return '3/4';
+    if (Math.abs(scaled - 1.5) < 0.05) return '1 1/2';
+    if (Math.abs(scaled - 2.5) < 0.05) return '2 1/2';
+    return (Math.round(scaled * 4) / 4).toString();
+  });
+}
+
+// ── VIEW RECIPE ───────────────────────────────────────────
 function openView(id) {
   var r = recipes.find(function(x) { return x.id === id; });
   if (!r) return;
   currentViewId = id;
   document.getElementById('v-edit-btn').style.display = isLoggedIn ? 'inline-block' : 'none';
-
   document.getElementById('v-cat').textContent = r.category || '';
   document.getElementById('v-title').textContent = r.title;
   document.getElementById('v-tags').textContent = r.tags ? 'Tags: ' + r.tags : '';
+  document.getElementById('v-url').innerHTML = r.url
+    ? '<a href="' + r.url + '" target="_blank" rel="noopener noreferrer" style="font-size:.72rem;color:var(--accent)">View original source &rarr;</a>' : '';
 
-  var vUrl = document.getElementById('v-url');
-  vUrl.innerHTML = r.url
-    ? '<a href="' + r.url + '" target="_blank" rel="noopener noreferrer" style="font-size:.72rem;color:var(--accent)">View original source &rarr;</a>'
-    : '';
-
-  // Action bar
   var bar = document.getElementById('v-action-bar');
   var starCls = r.starred ? ' star-on' : '';
   var triedCls = r.tried ? ' tried-on' : '';
-  var starLbl = r.starred ? '&#9733; Starred' : '&#9734; Star';
-  var triedLbl = r.tried ? '&#10003; Tried' : 'Mark as tried';
   bar.innerHTML =
-    '<button class="vbtn' + starCls + '" onclick="toggleStar(' + id + ')">' + starLbl + '</button>'
-    + (isLoggedIn ? '<button class="vbtn' + triedCls + '" onclick="toggleTried(' + id + ')">' + triedLbl + '</button>' : '')
+    '<button class="vbtn' + starCls + '" onclick="toggleStar(' + id + ')">' + (r.starred ? '&#9733; Starred' : '&#9734; Star') + '</button>'
+    + (isLoggedIn ? '<button class="vbtn' + triedCls + '" onclick="toggleTried(' + id + ')">' + (r.tried ? '&#10003; Tried' : 'Mark as tried') + '</button>' : '')
     + (isLoggedIn ? '<button class="vbtn del" onclick="deleteRecipe(' + id + ')">Delete</button>' : '');
 
   // Serving scaler
   var baseServings = r.servings ? parseInt(r.servings, 10) : 0;
   var estimated = false;
   if (!baseServings) {
-    // Smart estimate from ingredient weights
     var nums = (r.ingredients || '').match(/(\d+(?:\.\d+)?)\s*(g|kg|ml|l)\b/gi) || [];
     var totalG = 0, totalMl = 0;
     nums.forEach(function(m) {
       var parts = m.match(/(\d+(?:\.\d+)?)\s*(g|kg|ml|l)/i);
       if (!parts) return;
-      var v = parseFloat(parts[1]);
-      var u = parts[2].toLowerCase();
+      var v = parseFloat(parts[1]), u = parts[2].toLowerCase();
       if (u === 'kg') totalG += v * 1000;
       else if (u === 'g') totalG += v;
       else if (u === 'l') totalMl += v * 1000;
@@ -615,22 +603,17 @@ function openView(id) {
   }
   window._scalerBase = baseServings;
   window._scalerCurrent = baseServings;
-  window._scalerRecipeId = id;
 
   function renderScaler() {
     var cur = window._scalerCurrent, base = window._scalerBase;
-    var changed = cur !== base;
-    var estHtml = estimated
-      ? '<span class="info-icon">&#9432;<span class="info-tip">Estimated from ingredient weights</span></span>'
-      : '';
+    var estHtml = estimated ? '<span class="info-icon">&#9432;<span class="info-tip">Estimated from ingredient weights</span></span>' : '';
     document.getElementById('v-scaler').innerHTML =
-      '<div class="scaler-bar">'
-      + '<span class="scaler-label">Servings</span>'
+      '<div class="scaler-bar"><span class="scaler-label">Servings</span>'
       + '<button class="scaler-btn" onclick="scalerAdj(-1)">&#8722;</button>'
       + '<span class="scaler-count">' + cur + '</span>'
       + '<button class="scaler-btn" onclick="scalerAdj(1)">+</button>'
       + estHtml
-      + '<button class="scaler-reset" id="scaler-reset" onclick="scalerReset()" style="display:' + (changed ? 'inline' : 'none') + '">Reset</button>'
+      + (cur !== base ? '<button class="scaler-reset" onclick="scalerReset()">Reset</button>' : '')
       + '</div>';
     renderIngScaled();
   }
@@ -648,29 +631,19 @@ function openView(id) {
         var clean = stripLeading(line);
         var scaled = ratio === 1 ? clean : scaleLineQty(clean, ratio);
         var uid = 'cb' + Math.random().toString(36).slice(2);
-        var boldStyle = ratio !== 1 ? 'font-weight:600' : '';
         iHtml += '<li id="li-' + uid + '" style="display:flex;align-items:flex-start;gap:.6rem;padding:.35rem 0;border-bottom:1px solid rgba(60,30,10,.05)">'
           + '<input type="checkbox" id="' + uid + '" onchange="toggleStrike(\'' + uid + '\')" style="flex-shrink:0;margin-top:.25rem;accent-color:var(--accent);cursor:pointer">'
-          + '<label for="' + uid + '" id="lbl-' + uid + '" style="font-size:.87rem;line-height:1.6;cursor:pointer;color:var(--dark);' + boldStyle + '">' + scaled + '</label></li>';
+          + '<label for="' + uid + '" id="lbl-' + uid + '" style="font-size:.87rem;line-height:1.6;cursor:pointer;color:var(--dark);' + (ratio !== 1 ? 'font-weight:600' : '') + '">' + scaled + '</label></li>';
       }
     });
     iHtml += '</ul>';
     document.getElementById('v-ingredients').innerHTML = iHtml;
   }
 
-  window.scalerAdj = function(d) {
-    window._scalerCurrent = Math.max(1, window._scalerCurrent + d);
-    renderScaler();
-  };
-  window.scalerReset = function() {
-    window._scalerCurrent = window._scalerBase;
-    renderScaler();
-  };
-
-  document.getElementById('v-scaler').innerHTML = '';
+  window.scalerAdj = function(d) { window._scalerCurrent = Math.max(1, window._scalerCurrent + d); renderScaler(); };
+  window.scalerReset = function() { window._scalerCurrent = window._scalerBase; renderScaler(); };
   renderScaler();
 
-  // Method
   var notesEl = document.getElementById('v-notes');
   if (r.notes) {
     var nLines = r.notes.split('\n'), stepNum = 1;
@@ -689,11 +662,8 @@ function openView(id) {
     notesEl.innerHTML = nHtml;
   } else { notesEl.innerHTML = ''; }
 
-  // Extra notes
-  var en = document.getElementById('v-extra-notes');
-  en.innerHTML = r.extraNotes
-    ? '<p style="font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mid);margin-bottom:.5rem">Notes</p><p style="font-size:.85rem;line-height:1.75;color:var(--mid);white-space:pre-wrap">' + r.extraNotes + '</p>'
-    : '';
+  document.getElementById('v-extra-notes').innerHTML = r.extraNotes
+    ? '<p style="font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mid);margin-bottom:.5rem">Notes</p><p style="font-size:.85rem;line-height:1.75;color:var(--mid);white-space:pre-wrap">' + r.extraNotes + '</p>' : '';
 
   document.getElementById('view-modal').classList.add('open');
 }
@@ -705,25 +675,24 @@ function toggleStrike(uid) {
 }
 function toggleStar(id) {
   var r = recipes.find(function(x) { return x.id === id; });
-  if (r) { r.starred = !r.starred; saveRecipes(); openView(id); }
+  if (r) { r.starred = !r.starred; dbUpdate(r); openView(id); }
 }
 function toggleTried(id) {
   if (!requireLogin()) return;
   var r = recipes.find(function(x) { return x.id === id; });
-  if (r) { r.tried = !r.tried; saveRecipes(); openView(id); }
+  if (r) { r.tried = !r.tried; dbUpdate(r); openView(id); }
 }
 function deleteRecipe(id) {
-  if (!requireLogin()) return;
+  dbDelete(id);
   recipes = recipes.filter(function(x) { return x.id !== id; });
-  saveRecipes(); closeView(); renderCategories();
+  closeView(); renderCategories();
   if (currentCategory) filterCategory(currentCategory);
   showToast('Recipe deleted.');
 }
 
-// Edit
+// ── EDIT ─────────────────────────────────────────────────
 function openEditFromView() {
   if (!requireLogin()) return;
-  if (!currentViewId) return;
   var r = recipes.find(function(x) { return x.id === currentViewId; });
   if (!r) return;
   document.getElementById('e-id').value = r.id;
@@ -739,7 +708,7 @@ function openEditFromView() {
   document.getElementById('edit-modal').classList.add('open');
 }
 function closeEdit() { document.getElementById('edit-modal').classList.remove('open'); }
-async function saveEdit() {
+function saveEdit() {
   var id = parseInt(document.getElementById('e-id').value, 10);
   var r = recipes.find(function(x) { return x.id === id; });
   if (!r) return;
@@ -750,20 +719,19 @@ async function saveEdit() {
   r.ingredients = document.getElementById('e-ingredients').value.trim();
   r.notes = document.getElementById('e-notes').value.trim();
   r.extraNotes = document.getElementById('e-extra-notes').value.trim();
-  await updateRecipe(r);
+  dbUpdate(r);
   closeEdit(); openView(id); renderCategories();
   showToast('Recipe updated.');
 }
 
-// Add
+// ── ADD ───────────────────────────────────────────────────
 function openModal() { if (!requireLogin()) return; document.getElementById('modal').classList.add('open'); document.getElementById('f-title').focus(); }
 function closeModal() { document.getElementById('modal').classList.remove('open'); }
-async function addRecipe() {
+function addRecipe() {
   var title = document.getElementById('f-title').value.trim();
   if (!title) { showToast('Please add a title'); return; }
   var r = {
-    id: null,
-    title: title,
+    id: Date.now(), title: title,
     category: document.getElementById('f-cat').value || 'Other',
     tags: document.getElementById('f-tags').value.trim(),
     url: document.getElementById('f-url').value.trim(),
@@ -773,26 +741,25 @@ async function addRecipe() {
     starred: false, tried: false
   };
   showToast('Saving\u2026');
-  var saved = await saveNewRecipe(r);
-  if (!saved) { showToast('Error saving — check console.'); return; }
-  r.id = saved.id;
-  recipes.unshift(r);
-  ['f-title','f-tags','f-url','f-ingredients','f-notes','f-extra-notes'].forEach(function(id) {
-    document.getElementById(id).value = '';
+  dbInsert(r, function(saved) {
+    if (!saved) { showToast('Failed to save \u2014 check console.'); return; }
+    r.id = saved.id;
+    recipes.unshift(r);
+    ['f-title','f-tags','f-url','f-ingredients','f-notes','f-extra-notes'].forEach(function(id) { document.getElementById(id).value = ''; });
+    document.getElementById('f-cat').selectedIndex = 0;
+    closeModal(); catOffset = 0; renderCategories();
+    showToast('"' + r.title + '" added to the collection');
   });
-  document.getElementById('f-cat').selectedIndex = 0;
-  closeModal(); catOffset = 0; renderCategories();
-  showToast('"' + r.title + '" added to the collection');
 }
 
-// Search
+// ── SEARCH ────────────────────────────────────────────────
 function handleSearch(q) {
   var sec = document.getElementById('search-results-section');
   if (!q.trim()) { sec.style.display = 'none'; return; }
   var terms = q.toLowerCase().split(/\s+/).filter(Boolean);
   var hits = recipes.filter(function(r) {
-    var haystack = [r.title, r.ingredients, r.category, r.tags].join(' ').toLowerCase();
-    return terms.every(function(t) { return haystack.indexOf(t) >= 0; });
+    var hay = [r.title, r.ingredients, r.category, r.tags].join(' ').toLowerCase();
+    return terms.every(function(t) { return hay.indexOf(t) >= 0; });
   });
   document.getElementById('search-results-title').textContent = '"' + q + '" \u2014 ' + hits.length + ' result' + (hits.length !== 1 ? 's' : '');
   var grid = document.getElementById('search-results-grid');
@@ -814,11 +781,23 @@ function toggleSearch() {
   else { inp.value = ''; document.getElementById('search-results-section').style.display = 'none'; }
 }
 
+// ── TOAST ─────────────────────────────────────────────────
 function showToast(msg) {
   var t = document.getElementById('toast');
   t.textContent = msg; t.classList.add('show');
   setTimeout(function() { t.classList.remove('show'); }, 2600);
 }
+
+// ── INIT ──────────────────────────────────────────────────
+renderCategories();
+updateNavAuth();
+window.addEventListener('load', function() {
+  initSupabase();
+  loadRecipes(function() {
+    renderCategories();
+    updateNavAuth();
+  });
+});
 </script>
 </body>
 </html>
