@@ -1,78 +1,19 @@
 <!DOCTYPE html>
-<html lang="en"> 
-<head> 
-    <meta charset="UTF-8"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <title>Recipe Archive</title> 
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"> 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script> 
-    <script src="https://cdn.jsdelivr.net/npm/motion@11.11.13/dist/motion.js"></script> 
-    <style>
-        *{margin:0;padding:0;box-sizing:border-box} 
-        
-        :root{ 
-            --cream:#FDFBF7;--brown:#3d1f0f;--brown2:#5c2e10;--dark:#1a1210; 
-            --mid:#7a6a5a;--accent:#b8834a;--line:rgba(60,30,10,0.1); 
-            --serif:'Playfair Display',Georgia,serif;--sans:'Inter',sans-serif; 
-        }
-
-        /* ==========================================
-           MOBILE RESPONSIVE FIXES 
-           ========================================== */
-        @media (max-width: 768px) {
-            /* 1. Forces main layout layouts to stack with the photo on top */
-            main, section, header, .container, .grid, .flex {
-                display: flex !important;
-                flex-direction: column-reverse !important; 
-                padding: 15px !important;
-                width: 100% !important;
-                max-width: 100% !important;
-            }
-
-            /* 2. Hides the vertical side text so it doesn't clip off-screen */
-            aside, .sidebar, .vertical-text, [style*="writing-mode"] {
-                display: none !important;
-            }
-
-            /* 3. Keeps images properly proportioned on mobile phones */
-            img, figure {
-                width: 100% !important;
-                height: auto !important;
-                max-width: 100% !important;
-                object-fit: cover !important;
-            }
-
-            /* 4. Turns the category section into a smooth horizontal swipe track */
-            .categories, [class*="category"], [class*="collection"] {
-                display: flex !important;
-                flex-direction: row !important;
-                flex-wrap: nowrap !important; /* Prevents wrapping down to next line */
-                overflow-x: auto !important;   /* Enables side-to-side scrolling */
-                -webkit-overflow-scrolling: touch !important; /* Smooth scrolling for iOS */
-                justify-content: flex-start !important;
-                gap: 20px !important;
-                padding: 10px 15px !important;
-                width: 100% !important;
-                scrollbar-width: none !important; /* Hides Firefox scrollbar */
-            }
-
-            /* Hides scrollbars on Chrome, Safari, and newer browsers */
-            .categories::-webkit-scrollbar, 
-            [class*="category"]::-webkit-scrollbar,
-            [class*="collection"]::-webkit-scrollbar {
-                display: none !important;
-            }
-
-            /* Prevents individual category icons from squeezing or flattening */
-            .categories > *, 
-            [class*="category"] > *, 
-            [class*="collection"] > * {
-                flex-shrink: 0 !important;
-            }
-        }
-
-        /* PASTE THE REST OF YOUR ORIGINAL CSS STYLES DIRECTLY BELOW THIS LINE */
-
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recipe Archive</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/motion@11.11.13/dist/motion.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --cream:#FDFBF7;--brown:#3d1f0f;--brown2:#5c2e10;--dark:#1a1210;
+  --mid:#7a6a5a;--accent:#b8834a;--line:rgba(60,30,10,0.1);
+  --serif:'Playfair Display',Georgia,serif;--sans:'Inter',sans-serif;
+}
 html,body{min-height:100vh;font-family:var(--sans);overflow-x:hidden}
 body{background:var(--brown);position:relative}
 .bg-shape{position:fixed;pointer-events:none;z-index:0}
