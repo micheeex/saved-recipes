@@ -6,6 +6,7 @@
 <title>Recipe Archive</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/motion@11.11.13/dist/motion.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -392,10 +393,12 @@ function loadRecipes() {
 // Show categories immediately, then refresh after data loads
 renderCategories();
 updateNavAuth();
-loadRecipes().then(function() {
-  renderCategories();
-  updateNavAuth();
-}).catch(function(e) { console.error(e); });
+window.addEventListener('load', function() {
+  loadRecipes().then(function() {
+    renderCategories();
+    updateNavAuth();
+  }).catch(function(e) { console.error(e); });
+});
 
 // Nav helpers
 function goHome() {
@@ -769,11 +772,14 @@ async function addRecipe() {
     extraNotes: document.getElementById('f-extra-notes').value.trim(),
     starred: false, tried: false
   };
+  showToast('Saving\u2026');
   var saved = await saveNewRecipe(r);
-  if (!saved) { showToast('Error saving recipe.'); return; }
+  if (!saved) { showToast('Error saving — check console.'); return; }
   r.id = saved.id;
   recipes.unshift(r);
-  ['f-title','f-tags','f-url','f-ingredients','f-notes','f-extra-notes'].forEach(function(id) { document.getElementById(id).value = ''; });
+  ['f-title','f-tags','f-url','f-ingredients','f-notes','f-extra-notes'].forEach(function(id) {
+    document.getElementById(id).value = '';
+  });
   document.getElementById('f-cat').selectedIndex = 0;
   closeModal(); catOffset = 0; renderCategories();
   showToast('"' + r.title + '" added to the collection');
