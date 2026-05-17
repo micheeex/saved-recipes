@@ -50,9 +50,27 @@ nav{display:flex;justify-content:space-between;align-items:center;padding:1.1rem
 .intro-heading{font-family:var(--serif);font-size:1.5rem;font-weight:400;line-height:1.3;margin-bottom:1.2rem;font-style:italic}
 .intro-sub{font-family:var(--serif);font-size:1rem;font-weight:400;line-height:1.4;margin-bottom:1rem;color:var(--dark)}
 .intro-body{font-size:.8rem;line-height:1.8;color:var(--mid)}
+
+@media(max-width:600px){
+  .outer{padding:0}
+  .side-text,.side-text2{display:none}
+  #app-frame{max-width:100%;box-shadow:none}
+  nav{padding:.9rem 1.2rem}
+  .nav-links{gap:1rem}
+  .hero{padding:2rem 1.2rem .8rem}
+  .intro{grid-template-columns:1fr}
+  .intro-img{aspect-ratio:16/9;border-right:none;border-bottom:1px solid var(--line)}
+  .intro-text{padding:1.8rem 1.4rem;border-left:none}
+  .collection-section{padding:1.5rem 1rem 2rem}
+  .cat-track-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px}
+  .cat-track{width:max-content}
+  #cat-page-grid,.all-recipes-page,[id=all-recipes-page]{padding:1.5rem 1.2rem}
+  .modal{padding:1.6rem 1.2rem}
+  .field-row{grid-template-columns:1fr}
+}
 #search-results-section{display:none;padding:1rem 2.5rem 2rem}
 #search-results-section h2{font-family:var(--serif);font-size:1.2rem;font-weight:400;margin-bottom:1.2rem;padding-bottom:.6rem;border-bottom:1px solid var(--line)}
-.results-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1.2rem}
+#search-results-grid{}
 .recipe-card{cursor:pointer}
 .recipe-img-wrap{position:relative;overflow:hidden;aspect-ratio:4/3;margin-bottom:.75rem;border-radius:4px}
 .recipe-img-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:2.6rem;background:linear-gradient(145deg,#e8ddd0,#d0c0a8);transition:transform .5s cubic-bezier(.4,0,.2,1)}
@@ -154,7 +172,7 @@ nav{display:flex;justify-content:space-between;align-items:center;padding:1.1rem
     </nav>
 
     <section class="hero">
-      <h1 class="hero-quote">&ldquo;First we eat, then <p>we do <em style="color:var(--accent)">everything else.</p></em>&rdquo;</h1>
+      <h1 class="hero-quote">&ldquo;First we eat, then we do <em style="color:var(--accent)">everything else.</em>&rdquo;</h1>
       <p class="hero-attr">&mdash; M.F.K. Fisher</p>
       <div class="hero-divider"></div>
     </section>
@@ -764,11 +782,9 @@ function handleSearch(q) {
   document.getElementById('search-results-title').textContent = '"' + q + '" \u2014 ' + hits.length + ' result' + (hits.length !== 1 ? 's' : '');
   var grid = document.getElementById('search-results-grid');
   grid.innerHTML = hits.length ? hits.map(function(r) {
-    return '<div class="recipe-card" onclick="openView(' + r.id + ')">'
-      + '<div class="recipe-img-wrap"><div class="recipe-img-ph">' + (EMOJIS[r.category] || EMOJIS.Default) + '</div>'
-      + '<span class="recipe-tag">' + (r.category || '') + '</span></div>'
-      + '<p class="recipe-title">' + r.title + '</p>'
-      + '<p class="recipe-meta">' + (r.tags || '') + '</p></div>';
+    return '<div class="slim-card" onclick="openView(' + r.id + ')">'
+      + '<div><p class="slim-title">' + r.title + '</p><p class="slim-tags">' + (r.tags || '') + '</p></div>'
+      + '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>';
   }).join('') : '<p class="empty" style="grid-column:1/-1">Nothing found.</p>';
   sec.style.display = 'block';
   sec.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
